@@ -25,6 +25,10 @@ class CardLs:
             return 0
         else:
             return self.cards[index]
+        
+    def get_rand(self):
+        """Returns a random card from self.cards"""
+        return random.choice(self.cards)
     
     def find(self, search, func):
         """searches self.cards for a given string.
@@ -42,17 +46,7 @@ class CardLs:
         """Shuffles self.cards.
         
         It chooses to random indices and swaps them and repeats random swap operations for at least as many times as half the length of the list and up to 3 times the list's length"""
-        length, end_index = len(self.cards), len(self.cards)-1
-        num_times = length + random.randint(length//2,length*3)
-
-        for i in range(num_times):
-            rand_num1, rand_num2 = random.randint(0,end_index), random.randint(0,end_index)
-            temp = self.cards[rand_num1]
-
-            self.cards[rand_num1] = self.cards[rand_num2]
-            self.cards[rand_num2] = temp
-        
-        return self.cards
+        return random.shuffle(self.cards)
     
     def __str__(self):
         """Prints each card on its own line"""

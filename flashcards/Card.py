@@ -18,6 +18,14 @@ class Card:
     def __str__(self):
         """__str__ for Card class, prints term then defn seperated by _:_ ending with a linebreak"""
         return f"{self.term} : {self.defn}"
+    
+    def __eq__(self, obj):
+        """__eq__ for Card, checks if its a type(Card) and then makes sure its term and fen are the same as the obj."""
+        if isinstance(obj, self):
+            if self.term == obj.term:
+                if self.defn == obj.defn:
+                    return True
+        return False
 
 
             
