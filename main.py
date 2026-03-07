@@ -1,15 +1,15 @@
-# Main
-# card = Card("T1", "D1")
+from flashcards.Card import Card
+from flashcards.CardLs import CardLs
 
-# Cards = [card, Card("T2","D2"), Card("T3","D3"), Card("T4","D4"), Card("T5","D5"), Card("T6","D6"), Card("T7","D7")]
-# FlashCards = Set(Cards)
+card = Card("T1", "D1")
 
-# print(card)
-# print()
-# print(FlashCards)
+Cards = [card, Card("T2","D2"), Card("T3","D3"), Card("T4","D4"), Card("T5","D5"), Card("T6","D6"), Card("T7","D7")]
+# print(type(Cards))
+FlashCards = CardLs(Cards)
 
-# print(FlashCards.find("T1", Card.get_term))
-# print()
+print(f"card: {card}\n")
+print(f"FlashCards\n{FlashCards}")
 
-# FlashCards.shuffle()
-# print(FlashCards)
+print(f"{FlashCards.find("T1", Card.get_term)}\n")
+FlashCards.shuffle()
+print(FlashCards)
