@@ -2,9 +2,11 @@ class Card:
 
     # Constructors
     def __init__(self, term, defn) -> Card: 
-        """Creates a card object with two inputs storing them as term and defn
+        """
+        Creates a card object with two inputs storing them as term and defn.
         
-        meant to serve a object abstracting a flashcard: front and back, or term and defn"""
+        Meant to serve a object abstracting a flashcard: front and back, or term and defn.
+        """
         if not term is None:
             if not defn is None:
                 self.term, self.defn = term, defn
@@ -15,20 +17,28 @@ class Card:
     
     # Getters
     def get_term(self) -> Any:
-        """returns a cards term"""
+        """
+        Returns a cards term.
+        """
         return self.term
     
     def get_defn(self) -> Any:
-        """returns a cards defn"""
+        """
+        Returns a cards defn.
+        """
         return self.defn
     
     # Class Methods
     def __str__(self):
-        """__str__ for Card class, prints term then defn seperated by _:_ ending with a linebreak"""
+        """
+        __str__ for Card class, prints term then defn seperated by _:_ ending with a linebreak.
+        """
         return f"{self.term} : {self.defn}"
     
     def __eq__(self, obj):
-        """__eq__ for Card, checks if its a type(Card) and then makes sure its term and fen are the same as the obj."""
+        """
+        __eq__ for Card, checks if its a type(Card) and then makes sure its term and fen are the same as the obj.
+        """
         if isinstance(obj, self):
             if self.term == obj.term:
                 if self.defn == obj.defn:

@@ -1,29 +1,39 @@
 class Console:
     # TODO add way to store history so its not just a priNT and input replacement
     
-    def __init__(self):
-        """Simple abstraction class for interacting with console to avoid input and print commands"""
+    def __init__(self)  -> Console:
+        """
+        Simple abstraction class for interacting with console to avoid input and print commands.
+        """
         self.hist = list()
 
-    def take_in(self):
-        """Serves a a wrapper for input() and logs input from input()"""
+    def take_in(self)  -> str:
+        """
+        Serves a a wrapper for input() and logs input from input().
+        """
         input = input()
         self.log(input)
         return input
     
-    def give_out(self, out, endchar="\n"):
-        """Serves as a wrapper for print() and logs the requested arg out"""
+    def give_out(self, out:str, endchar="\n") -> str:
+        """
+        Serves as a wrapper for print() and logs the requested arg out. with optional arg end for print().
+        """
         self.log(f"{out}{endchar}")
         print(out, end=endchar)
 
-    def log(self, line):
-        """Appends line to self.hist"""
+    def log(self, line:str) -> None: #TODO check what input() returns as for type hint
+        """
+        Appends line to self.hist.
+        """
         self.hist.append(line)
 
-    def interpret(self, input, commands, responses):
-        """takes a given string input and finds a matching valid command from commands and returns the response of the same index.
+    def interpret(self, input:str, commands:list, responses:list) -> Any:
+        """
+        Takes a given string input and finds a matching valid command from commands and returns the response of the same index.
         
-        every valid arg commands and arg responses always have "exit" and "self.console_exit()" appended to the end so exit is always possible"""
+        every valid arg commands and arg responses always have "exit" and "self.console_exit()" appended to the end so exit is always possible.
+        """
         if isinstance(commands, list):
             if isinstance(responses, list):
                 if len(commands) == len(responses):
@@ -32,55 +42,74 @@ class Console:
                     for index, com in enumerate(commands):
                         if com == input:
                             return responses[index]
-                    raise self.InvlaidCommand(input)
+                    raise self.InvalidCommand(input)
                 else:
-                    raise self.InvlaidArgsLen(len(commands), len(responses))
+                    raise self.InvalidArgsLen(len(commands), len(responses))
             else:
-                raise self.InvlaidResponsesListType(type(responses))
+                raise self.InvalidResponsesListType(type(responses))
                 # why the self. ?
-        raise self.InvlaidCommandsListType(type(commands))
+        raise self.InvalidCommandsListType(type(commands))
     
-    def pass_comm(self):
-        """acts and  None action for as one of of the args in interpret() arg responses"""
+    def pass_comm(self) -> None:
+        """
+        Acts and  None action for as one of of the args in interpret() arg responses
+        """
         return None
        
-    def ask(self, prompt, end="\n"):
-        """Prints arg prompt and returns the next line taken in"""
+    def ask(self, prompt:str, end="\n") -> str:
+        """
+        Prints arg prompt and returns the next line taken in, with optional arg end for self.give_out() for printing.
+        """
         self.give_out(prompt, end)
         return self.take_in()
     
-    def prompt(self, prompt, commands, responses, end="\n"):
-        """Sends a prompt and interperts the input based on the given valid commands and responses"""
+    def prompt(self, prompt:str, commands:list, responses:list, end="\n") -> Any:
+        """
+        Sends a prompt and interperts the input based on the given valid commands and responses. With optional arg end for self.interpret for printing.
+        """
         input = self.ask(prompt, end)
         return self.interpret(input, commands, responses)
     
-    def simple_prompt(self, prompt, responses):
-        """Sends a prompt and interperts the input based on the simples commands 'y' and 'n' and responses"""
+    def simple_prompt(self, prompt:str, responses:list) -> Any:
+        """
+        Sends a prompt and interperts the input based on the simples commands 'y' and 'n' and responses
+        """
         input = self.ask(prompt)
         return self.interpret(input, ["y", "n"], responses)
     
-    def console_exit(self):
+    def console_exit(self) -> str:
+        """
+        Console class abstraction of system exit(). Prints a nice goodbye first :).
+        """
         print("Goodbye")
         exit()
 
     
 # Exceptions
-    class InvlaidCommand (Exception):
-        """Exception for when the loop in interpret() finishes without finsing a match in commands for input"""
-        def __init__(self, input, message="Input does match list of valid commands"):
+    class InvalidCommand (Exception):
+        """
+        Exception for when the loop in interpret() finishes without finsing a match in commands for input
+        """
+        def __init__(self, input, message="Input does match list of valid commands") -> InvalidCommand:
             super().__init__(f"{message}: {input}")
     
-    class InvlaidArgsLen (Exception):
-        """Exception for when the arg commands and arg responses for interpret() are unequal"""
-        def __init__(self, input1, input2, message="length of arg commands and arg responses do not match"):
+    class InvalidArgsLen (Exception):
+        """
+        Exception for when the arg commands and arg responses for interpret() are unequal
+        """
+        def __init__(self, input1, input2, message="length of arg commands and arg responses do not match") -> InvalidArgsLen:
             super().__init__(f"{message} len(commands): {input1}, len(responses): {input2}")
 
-    class InvlaidCommandsListType (Exception):
-        """Exception for when interpret() arg commands is not of type 'list'"""
-        def __init__(self, input, message="Args commands is not of valid type 'list', GIVEN="):
+    class InvalidCommandsListType (Exception):
+        """
+        Exception for when interpret() arg commands is not of type 'list'
+        """
+        def __init__(self, input, message="Args commands is not of valid type 'list', GIVEN=") -> InvalidCommandsListType:
             super().__init__(f"{message}{input}")
     
-    class InvlaidResponsesListType (Exception):
-        """Exception for when interpret() arg responses is not of type 'list'"""
-        def __init__(self, input, message="Arg responses is not of valid type 'list', GIVEN="):
+    class InvalidResponsesListType (Exception):
+        """
+        Exception for when interpret() arg responses is not of type 'list'
+        """
+        def __init__(self, input, message="Arg responses is not of valid type 'list', GIVEN=") -> InvalidResponsesListType:
             super().__init__(f"{message}{input}")
