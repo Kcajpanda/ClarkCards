@@ -5,20 +5,25 @@ from .Console import Console
 
 class StudySess:
 
-    def __init__(self, cards):
+    def __init__(self, cards:list) -> StudySess:
+        """Engine Class that runs a StudyLs and allow sintercation with it and user through a console"""
         self.studyls = StudyLs(CardLs(cards))
         self.console = Console()
 
-    def shuffle(self):
+    def shuffle(self) -> None:
+        """Abstraced shuffle of mutable CardLs in StudyLs"""
         self.studyls.shuffle()
 
-    def next_card(self):
+    def next_card(self) -> Card:
+        """Abstracted next() of mutable Cardls in StudyLs"""
         next(self.studyls)
 
-    def start_over(self):
+    def start_over(self) -> None:
+        """Abstracted start_over() of mutable Cardls in StudyLs"""
         self.studyls.start_over()
 
-    def flash_loop(self):
+    def flash_loop(self) -> None:
+        """Loop for flashcards, begins by simple_prompt (yes/no) for shuffle then begns loop for prompting each card.defn then waiitng for either "" or "f". continues till set completes or exit(). after which user is simple prompted if they want to continu => call loop again else exits."""
         self.console.simple_prompt("Shuffle Set?", [self.studyls.shuffle, self.console.pass_comm()])
         while(True):
             try:

@@ -1,5 +1,7 @@
 class Card:
-    def __init__(self, term, defn):
+
+    # Constructors
+    def __init__(self, term, defn) -> Card: 
         """Creates a card object with two inputs storing them as term and defn
         
         meant to serve a object abstracting a flashcard: front and back, or term and defn"""
@@ -11,16 +13,16 @@ class Card:
         else:
             exit(f"Error invalid datatype for Card term creation GIVEN={type(term)}, cannot be Nonetype")
     
-    # Getter and Setter
-    def get_term(self):
+    # Getters
+    def get_term(self) -> Any:
         """returns a cards term"""
         return self.term
     
-    def get_defn(self):
+    def get_defn(self) -> Any:
         """returns a cards defn"""
         return self.defn
     
-    #Class Methods
+    # Class Methods
     def __str__(self):
         """__str__ for Card class, prints term then defn seperated by _:_ ending with a linebreak"""
         return f"{self.term} : {self.defn}"
