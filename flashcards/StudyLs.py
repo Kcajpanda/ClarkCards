@@ -4,7 +4,10 @@ from .CardLs import CardLs
 class StudyLs:
 
     def __init__(self, cardls):
-        self.save_ls, self.cardls = cardls
+        if isinstance(cardls, CardLs):
+            self.save_ls, self.cardls = cardls
+        else:
+            exit(f"Error invalid datatype for StudyLs creation GIVEN={type(cardls)}, EXPEC=CardLs")
 
     def get_ls(self):
         return self.cardls
@@ -29,6 +32,12 @@ class StudyLs:
 
     def shuffle(self):
         self.cardls.shuffle()
+    
+    def start_over(self):
+        self.cardls.start_over()
+
+    def __next__(self):
+        return next(self.cardls)
 
     def __str__(self):
         """Prints each card from cardls on its own line"""

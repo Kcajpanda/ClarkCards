@@ -8,8 +8,9 @@ class CardLs:
         """inits with list of cards becoming self.cards"""
         if isinstance(cards, list):
             self.cards = cards
+            self.cards_iter = iter(cards)
         else:
-            exit(f"error invalid datatype for Cards creation GIVEN={type(cards)}, EXPEC=list")
+            exit(f"Error invalid datatype for CardLs creation GIVEN={type(cards)}, EXPEC=list")
 
     def add(self, card):
         """takes give card an input and appends to end of self.cards"""
@@ -47,6 +48,12 @@ class CardLs:
         
         It chooses to random indices and swaps them and repeats random swap operations for at least as many times as half the length of the list and up to 3 times the list's length"""
         return random.shuffle(self.cards)
+    
+    def start_over(self):
+        self.cards_iter = iter(self.cards)
+    
+    def __next__(self):
+        return next(self.cards_iter)
     
     def __str__(self):
         """Prints each card on its own line"""

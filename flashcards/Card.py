@@ -3,7 +3,13 @@ class Card:
         """Creates a card object with two inputs storing them as term and defn
         
         meant to serve a object abstracting a flashcard: front and back, or term and defn"""
-        self.term, self.defn = term, defn
+        if not term is None:
+            if not defn is None:
+                self.term, self.defn = term, defn
+            else:
+                exit(f"Error invalid datatype for Card defn creation GIVEN={type(defn)}, cannot be Nonetype")
+        else:
+            exit(f"Error invalid datatype for Card term creation GIVEN={type(term)}, cannot be Nonetype")
     
     # Getter and Setter
     def get_term(self):
@@ -26,27 +32,3 @@ class Card:
                 if self.defn == obj.defn:
                     return True
         return False
-
-
-            
-# class Console:
-#     # TODO add way to store history so its not just a priNT and input replacement
-    
-#     def __init__(self):
-#         """Simple abstraction class for interacting with console to avoid input and print commands"""
-#         self.hist = list()
-
-#     def take_in(self):
-#         """Serves a a wrapper for input()"""
-#         return input()
-    
-#     def take_out(self, out):
-#         """Serves as a wrapper for print()"""
-#         print(out)
-
-#     def interpret(self, command):
-#         if command == "exit":
-#             print("Goodbye!")
-#             exit()
-#         elif command == "1":
-#             pass
