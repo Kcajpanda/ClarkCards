@@ -5,7 +5,7 @@ from .Console import Console
 
 class StudySess:
 
-    def __init__(self, cards:list) -> StudySess:
+    def __init__(self, cards:list):
         """
         Engine Class that runs a StudyLs and allows intercation with it and user through a console.
         """

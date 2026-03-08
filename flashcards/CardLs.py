@@ -4,13 +4,13 @@ from .Card import Card
 class CardLs:
      #TODO add __init_ for manually adding cards from console in
     # Constructors
-    def __init__(self, cards:list) -> CardLs:
+    def __init__(self, cards:list):
         """inits with list of cards becoming self.cards"""
         if isinstance(cards, list):
             self.cards = cards
-            self.cards_iter = iter(cards)
+            self.start_over()
         else:
-            exit(f"Error invalid datatype for CardLs creation GIVEN={type(cards)}, EXPEC=list")
+            raise InvalidCardLsArgType(cards)
     
     # Getters
     def get(self, index:int) -> Card:
@@ -82,3 +82,14 @@ class CardLs:
         for card in self.cards:
             string += str(card) + "\n"
         return string
+
+    # Exceptions
+class InvalidCardLsArgType (Exception):
+    """
+    Exception for when CardLs __init__ is passed an invalid typr for arg cardls.
+
+    EX:
+
+    """
+    def __init__(self, input, message="Error type of arg cardls must be 'list', GIVEN="):
+        super().__init__(f"{message}{type(input)}, EXPEC='list'")

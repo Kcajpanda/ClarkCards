@@ -1,7 +1,7 @@
 class Card:
 
     # Constructors
-    def __init__(self, term, defn) -> Card: 
+    def __init__(self, term, defn): 
         """
         Creates a card object with two inputs storing them as term and defn.
         
@@ -11,9 +11,9 @@ class Card:
             if not defn is None:
                 self.term, self.defn = term, defn
             else:
-                exit(f"Error invalid datatype for Card defn creation GIVEN={type(defn)}, cannot be Nonetype")
+                raise InvalidCardArgTypeDefn(defn)
         else:
-            exit(f"Error invalid datatype for Card term creation GIVEN={type(term)}, cannot be Nonetype")
+            raise InvalidCardArgTypeTerm(term)
     
     # Getters
     def get_term(self) -> Any:
@@ -39,8 +39,29 @@ class Card:
         """
         __eq__ for Card, checks if its a type(Card) and then makes sure its term and fen are the same as the obj.
         """
-        if isinstance(obj, self):
+        if isinstance(obj, Card):
             if self.term == obj.term:
                 if self.defn == obj.defn:
                     return True
         return False
+
+# Exceptions
+class InvalidCardArgTypeTerm (Exception):
+    """
+    Exception for when Card __init__ is passed an Nonetype for arg term.
+
+    EX:
+
+    """
+    def __init__(self, input, message="Error type of arg term cannot be None, GIVEN="):
+        super().__init__(f"{message}{type(input)}")
+
+class InvalidCardArgTypeDefn (Exception):
+    """
+    Exception for when Card __init__ is passed an Nonetype for arg defn.
+
+    EX:
+
+    """
+    def __init__(self, input, message="Error type of arg defn cannot be None, GIVEN="):
+        super().__init__(f"{message}{type(input)}")

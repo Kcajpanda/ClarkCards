@@ -4,14 +4,14 @@ import copy
 
 class StudyLs:
 
-    def __init__(self, cardls:CardLs) -> StudyLs:
+    def __init__(self, cardls:CardLs):
         """
         Wrapper for CardLs that allows a saved copy of orignal to be preserved and retored as needed.
         """
         if isinstance(cardls, CardLs):
             self.save_ls, self.cardls = cardls
         else:
-            exit(f"Error invalid datatype for StudyLs creation GIVEN={type(cardls)}, EXPEC=CardLs")
+            raise InvalidStudyLsArgType(cardls)
 
     # Getters
     def get_ls(self) -> CardLs:
@@ -88,3 +88,13 @@ class StudyLs:
         """
         return str(self.cardls)
     
+    # Exceptions
+class InvalidStudyLsArgType (Exception):
+    """
+    Exception for when __init__ is passed an invalid type for arg cardls.
+
+    EX:
+
+    """
+    def __init__(self, input, message="Error invalid datatype for StudyLs creation GIVEN="):
+        super().__init__(f"{message}{type(input)}, EXPEC=CardLs")
