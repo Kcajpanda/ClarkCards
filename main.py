@@ -1,10 +1,11 @@
 from flashcards.Card import Card
 from flashcards.CardLs import CardLs
 
-cardTest = False
-cardLsTest = True
-
 def class_tests():
+    cardTest = False
+    cardLsTest = True
+    studyLstest = True
+    studySessTest = True
 
     card = Card("T1", "D1")
     card2 = Card("T1", "D1")
