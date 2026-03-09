@@ -118,7 +118,7 @@ class Console:
     
     def tail(self, n=10):
         """
-        Unix Style printign of last 10 logs of self.hist
+        Unix Style printing of last 10 logs of self.hist
         """
         for log in self.hist[-n:]:
             self.print_log(log)
@@ -141,24 +141,3 @@ class InvalidCommand (Exception):
     """
     def __init__(self, input, message="Input does match list of valid commands"):
         super().__init__(f"{message}: {input}")
-
-class InvalidArgsLen (Exception):
-    """
-    Exception for when the arg commands and arg responses for interpret() are unequal
-    """
-    def __init__(self, input1, input2, message="length of arg commands and arg responses do not match"):
-        super().__init__(f"{message} len(commands): {input1}, len(responses): {input2}")
-
-class InvalidCommandsListType (Exception):
-    """
-    Exception for when interpret() arg commands is not of type 'list'
-    """
-    def __init__(self, input, message="Args commands is not of valid type 'list', GIVEN="):
-        super().__init__(f"{message}{input}")
-
-class InvalidResponsesListType (Exception):
-    """
-    Exception for when interpret() arg responses is not of type 'list'
-    """
-    def __init__(self, input, message="Arg responses is not of valid type 'list', GIVEN="):
-        super().__init__(f"{message}{input}")

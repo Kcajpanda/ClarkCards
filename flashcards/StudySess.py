@@ -35,11 +35,11 @@ class StudySess:
         """
         Loop for flashcards, begins by simple_prompt (yes/no) for shuffle then begns loop for prompting each card.defn then waiitng for either "" or "f". continues till set completes or exit(). after which user is simple prompted if they want to continu => call loop again else exits.
         """
-        self.console.simple_prompt("Shuffle Set?", [self.studyls.shuffle, "n", self.console.pass_comm()])
+        self.console.simple_prompt("Shuffle Set?", [self.studyls.shuffle, self.console.pass_comm()])
         while(True):
             try:
                 card = next(self.studyls)
-                self.console.prompt(str(card.get_term()), {"": lambda self.console.give_out(card.get_defn), "f": lambda self.console.give_out(card.get_defn)})
+                self.console.prompt(str(card.get_term()), {"": lambda: self.console.give_out(card.get_defn), "f": lambda: self.console.give_out(card.get_defn)})
             except StopIteration:
                 self.console.simple_prompt("Set Completed. Continue?", [self.console.pass_comm, self.console.console_exit])
                 break
